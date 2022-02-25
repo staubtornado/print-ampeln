@@ -1,10 +1,16 @@
 package Ampeln;
 
+import java.util.Arrays;
+
 import static Ampeln.Steuerung.sleep;
+
+/**
+ * @author Julian Kirchner; Jannis Dickel
+ */
 
 public class Ampel {
     private final Leuchte[] leuchten;
-    private int phase;
+    private int phase = 1;
 
     public Ampel(int anzahl_leuchten) {
         leuchten = new Leuchte[anzahl_leuchten];
@@ -13,32 +19,30 @@ public class Ampel {
         }
     }
 
+    /**
+     * @author Jannis Dickel
+     */
     public void next() {
         switch (phase) {
             case 0:
-                System.out.println("Diese Lampe ist nun rot.");
-                leuchten[0].switch_power();
-                leuchten[1].switch_power();
+                leuchten[0].on();
+                leuchten[1].off();
                 sleep(1500);
                 break;
             case 1:
-                System.out.println("Diese Lampe ist nun rot gelb.");
-                leuchten[1].switch_power();
+                leuchten[1].on();
                 sleep(1500);
                 break;
             case 2:
-                System.out.println("Diese Lampe ist nun gruen..");
-                leuchten[0].switch_power();
-                leuchten[1].switch_power();
-                leuchten[2].switch_power();
-                sleep(10000);
+                leuchten[0].off();
+                leuchten[1].off();
+                leuchten[2].on();
+                sleep(1500);
                 break;
             case 3:
-                System.out.println("Diese Lampe ist nun gelb.");
-                leuchten[2].switch_power();
-                leuchten[1].switch_power();
-                sleep(1500);
-                leuchten[0].switch_power();
+                leuchten[2].off();
+                leuchten[1].on();
+                sleep(10000);
                 break;
         }
 
@@ -47,5 +51,10 @@ public class Ampel {
             return;
         }
         phase = 0;
+    }
+
+    @Override
+    public String toString() {
+        return phase + ", Leuchten = [" + Arrays.toString(leuchten) + "]";
     }
 }

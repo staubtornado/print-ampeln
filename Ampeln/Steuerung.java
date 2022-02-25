@@ -1,6 +1,15 @@
 package Ampeln;
 
+/**
+ * @author Julian Kirchner; Jannis Dickel
+ */
+
 public class Steuerung {
+
+    /**
+     * @author Julian Kirchner
+     * @param ms Millisekunden, welche die Funktion warten soll.
+     */
     public static void sleep(int ms) {
         long start = System.currentTimeMillis();
 
@@ -9,6 +18,9 @@ public class Steuerung {
         }
     }
 
+    /**
+     * @author Julian Kirchner
+     */
     public static void main(String[] args) {
         Kreuzung kreuzung = new Kreuzung();
 
